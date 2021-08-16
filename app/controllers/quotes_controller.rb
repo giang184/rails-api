@@ -1,7 +1,8 @@
 class QuotesController < ApplicationController
 
   def index
-    @quotes = Quote.all
+    name = params[:name]
+    @quotes = Quote.search(name)
     json_response(@quotes)
   end
 
@@ -16,20 +17,21 @@ class QuotesController < ApplicationController
   end
 
   def update
-  @quote = Quote.find(params[:id])
-  if @quote.update!(quote_params)
-    render status: 200, json: {
-      message: "This quote has been updated successfully."
-    }
-  end
+    @quote = Quote.find(params[:id])
+    if @quote.update!(quote_params)
+      render status: 200, json: {
+        message: "This quote has been updated successfully."
+      }
+    end
   end
 
   def destroy
-    @quote = Quote.find(params[:id])
-    if @quote.destroy!
-      render status: 200, json: {
-        message: "This quote has been destroyed."
-      }
+      @quote = Quote.find(params[:id])
+      if @quote.destroy!
+        render status: 200, json: {
+          message: "This quote has been destroyed."
+        }
+    end
   end
 
   private

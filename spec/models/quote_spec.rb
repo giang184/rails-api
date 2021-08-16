@@ -6,5 +6,4 @@ describe Quote do
     quote = FactoryBot.create(:quote, :author => "Ada Lovelace")
     expect(quote.author).to eq "Ada Lovelace"
   end
-
 end
